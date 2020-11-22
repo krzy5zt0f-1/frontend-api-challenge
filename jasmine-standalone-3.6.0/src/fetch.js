@@ -25,3 +25,32 @@ async function fetchPeeps() {
   	  document.getElementById('peeps').appendChild(li)
   }
   }
+
+
+  async function postUser(user, password) {
+    const url = 'https://chitter-backend-api-v2.herokuapp.com/users'
+    await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({user: {handle:user, password:password}}),
+      headers: {'Content-Type': 'application/json'},
+     })
+    .then(function(resp) { return resp.json() }) // Convert data to json
+    .then(function(data) {
+      console.log('Success', data);
+    })
+    .catch(function(error) {
+
+    });
+    }
+
+    async function postUserHelper() {
+      const url = 'https://chitter-backend-api-v2.herokuapp.com/users'
+      await fetch(url)
+      .then(function(resp) { return resp.json() }) // Convert data to json
+      .then(function(data) {
+        console.log(data);
+      })
+      .catch(function() {
+        // catch any errors
+      });
+      }
