@@ -17,6 +17,13 @@
 
 <body>
   <h1> Chitter</h1>
+
+  <form id="signup" onsubmit="return getNewUser()">
+    <label>Create account: </label><br></br>
+      <input type="text" id="username" placeholder="Username" required/>
+      <input type="password" id="password" placeholder="Password" required/>
+      <input type="submit" value="Sign up">
+      </form>
   <div id="peeps"></div>
 </body>
 </html>
