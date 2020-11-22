@@ -1,5 +1,4 @@
 describe("fetchPeeps", function(){
-  var promise;
 
   it('fetches from the correct API', async function() {
     spyOn(console, 'log');
@@ -12,7 +11,6 @@ describe("fetchPeeps", function(){
     spyOn(console, 'log');
     await fetchPeeps();
     expect(console.log).toHaveBeenCalledWith(jasmine.any(Array));
-  })
-
+  });
 
 })

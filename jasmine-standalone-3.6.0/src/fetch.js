@@ -4,18 +4,17 @@ async function fetchPeeps() {
   .then(function(resp) { return resp.json() }) // Convert data to json
   .then(function(data) {
     console.log(data);
-    displayPeeps(data);
+    displayPeepsInList(data);
   })
   .catch(function() {
     // catch any errors
   });
   }
 
-  function displayPeeps( d ) {
-  	var celcius = Math.round(parseFloat(d.main.temp)-273.15);
-  	var fahrenheit = Math.round(((parseFloat(d.main.temp)-273.15)*1.8)+32);
-
-  	document.getElementById('description').innerHTML = d.weather[0].description;
-  	document.getElementById('temp').innerHTML = celcius + '&deg;';
-  	document.getElementById('location').innerHTML = d.name;
+  function displayPeepsInList( d ) {
+  	for(let i = 0; i < d.length; i ++) {
+      var li = document.createElement("li");
+      li.appendChild(document.createTextNode(d[i].body));
+  	  document.getElementById('peeps').appendChild(li)
+  }
   }
