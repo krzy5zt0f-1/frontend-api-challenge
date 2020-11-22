@@ -14,7 +14,14 @@ async function fetchPeeps() {
   function displayPeepsInList( d ) {
   	for(let i = 0; i < d.length; i ++) {
       var li = document.createElement("li");
+      var br = document.createElement("br");
+      li.appendChild(document.createTextNode(d[i].user.handle));
+      li.appendChild(document.createElement('br'));
       li.appendChild(document.createTextNode(d[i].body));
+      li.appendChild(document.createElement('br'));
+      li.appendChild(document.createTextNode(d[i].created_at.split("T", 1)));
+      li.appendChild(document.createTextNode(', '+ d[i].created_at.split("T")[1].split(".", 1)));
+      document.getElementById('peeps').appendChild(br);
   	  document.getElementById('peeps').appendChild(li)
   }
   }
