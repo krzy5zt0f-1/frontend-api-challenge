@@ -54,3 +54,36 @@ async function fetchPeeps() {
         // catch any errors
       });
       }
+
+      async function logIn(user, password){
+        const url = 'https://chitter-backend-api-v2.herokuapp.com/sessions';
+        await fetch(url, {
+          method: 'POST',
+          body: JSON.stringify({session: {handle:user, password:password}}),
+          headers: {'Content-Type': 'application/json'},
+          })
+          .then(function(resp) { return resp.json() }) // Convert data to json
+          .then(function(data) {
+            console.log('Success', data);
+          })
+          .catch(function(error) {
+            console.log("Invalid username or password");
+          });
+        }
+
+        async function postPeep(user_id, session_key, body){
+          const url = 'https://chitter-backend-api-v2.herokuapp.com/peeps';
+          await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({peep: {user_id:user_id, body:body}}),
+            headers: {'Authorization': `Token token=${session_key}`, 'Content-Type': 'application/json'},
+            credentials: 'omit',
+            })
+            .then(function(resp) { return resp.json() }) // Convert data to json
+            .then(function(data) {
+              console.log('Success', data);
+            })
+            .catch(function(error) {
+              console.log("Invalid username or password");
+            });
+          }

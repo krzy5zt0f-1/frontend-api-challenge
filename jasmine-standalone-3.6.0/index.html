@@ -18,12 +18,19 @@
 <body>
   <h1> Chitter</h1>
 
-  <form id="signup" onsubmit="return getNewUser()">
+  <form id="signup" onsubmit="return getNewUser()" style="border-bottom: none">
     <label>Create account: </label><br></br>
       <input type="text" id="username" placeholder="Username" required/>
       <input type="password" id="password" placeholder="Password" required/>
       <input type="submit" value="Sign up">
       </form>
+
+      <form id="login" onsubmit="return getNewSession()" style="border-top: none">
+        <label>And/Or Login: </label><br></br>
+          <input type="text" id="user-name" placeholder="Username" required/>
+          <input type="password" id="pass" placeholder="Password" required/>
+          <input type="submit" value="Login">
+          </form>
   <div id="peeps"></div>
 </body>
 </html>
