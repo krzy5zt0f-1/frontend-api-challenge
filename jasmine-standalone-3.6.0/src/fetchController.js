@@ -10,7 +10,7 @@ function getNewUser() {
 }
 
 function getNewSession() {
-  var userName = document.getElementById ("user-name");
-  var password = document.getElementById ("pass");
-  logIn(userName.value, password.value);
+  let user = document.getElementById ("user-name");
+  let pass = document.getElementById ("pass");
+  logIn(user.value, pass.value);
 }

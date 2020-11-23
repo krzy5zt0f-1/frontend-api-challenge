@@ -59,3 +59,18 @@ describe("postPeep", function(){
 
 
 })
+
+describe("fetchPeep", function(){
+
+  it('fetches from the correct API', async function() {
+    spyOn(window, 'fetch').and.callThrough();
+		await fetchPeep(1);
+		expect(window.fetch).toHaveBeenCalledWith('https://chitter-backend-api-v2.herokuapp.com/peeps/1');
+	});
+  it("returns an array of objects that hold peeps", async function(){
+    spyOn(console, 'log');
+    await fetchPeep(1);
+    expect(console.log).toHaveBeenCalledWith(Object({ id: 1, body: 'Congrats for successfully requesting the peeps from the Chitter API! This is the first peep :)', created_at: '2020-03-06T17:16:22.601Z', updated_at: '2020-03-06T17:16:22.601Z', user: Object({ id: 1, handle: 'edward' }), likes: [ Object({ user: Object({ id: 40, handle: 'maria' }) }), Object({ user: Object({ id: 92, handle: 'Mokk' }) }) ] }));
+  });
+
+})

@@ -61,6 +61,7 @@ async function fetchPeeps() {
           method: 'POST',
           body: JSON.stringify({session: {handle:user, password:password}}),
           headers: {'Content-Type': 'application/json'},
+          crudentials: 'include',
           })
           .then(function(resp) { return resp.json() }) // Convert data to json
           .then(function(data) {
@@ -69,6 +70,11 @@ async function fetchPeeps() {
           .catch(function(error) {
             console.log("Invalid username or password");
           });
+        }
+
+        function saveSession(d, sessionKey ) {
+          sessionKey = d.session_key;
+          return sessionKey;
         }
 
         async function postPeep(user_id, session_key, body){
@@ -87,3 +93,64 @@ async function fetchPeeps() {
               console.log("Invalid username or password");
             });
           }
+
+          async function fetchPeep(id) {
+            const url = `https://chitter-backend-api-v2.herokuapp.com/peeps/${id}`
+            await fetch(url)
+            .then(function(resp) { return resp.json() }) // Convert data to json
+            .then(function(data) {
+              console.log(data);
+            })
+            .catch(function() {
+              // catch any errors
+            });
+            }
+
+            async function deletePeep(session_key, peep_id){
+              const url = `https://chitter-backend-api-v2.herokuapp.com/peeps/${peep_id}`;
+              await fetch(url, {
+                method: 'DELETE',
+                headers: {'Authorization': `Token token=${session_key}`},
+                credentials: 'omit',
+                })
+                .then(function(resp) { return resp.json() }) // Convert data to json
+                .then(function(data) {
+                  console.log('Success', data);
+                })
+                .catch(function(error) {
+                  console.log("Invalid username or password");
+                });
+              }
+
+              async function likePeep(username, user_id, session_key, peep_id){
+                const url = 'https://chitter-backend-api-v2.herokuapp.com/peeps/' + `${peep_id}` + '/likes/' + `${user_id}`;
+                await fetch(url, {
+                  method: 'PUT',
+                  body: JSON.stringify({user: {id:user_id, handle:username}}),
+                  headers: {'Authorization': `Token token=${session_key}`, 'Content-Type': 'application/json'},
+                  credentials: 'omit',
+                  })
+                  .then(function(resp) { return resp.json() }) // Convert data to json
+                  .then(function(data) {
+                    console.log('Success', data);
+                  })
+                  .catch(function(error) {
+                    console.log("Invalid username or password");
+                  });
+                }
+
+                async function unlikePeep(username, user_id, session_key, peep_id){
+                  const url = 'https://chitter-backend-api-v2.herokuapp.com/peeps/' + `${peep_id}` + '/likes/' + `${user_id}`;
+                  await fetch(url, {
+                    method: 'DELETE',
+                    headers: {'Authorization': `Token token=${session_key}`, 'Content-Type': 'application/json'},
+                    credentials: 'omit',
+                    })
+                    .then(function(resp) { return resp.json() }) // Convert data to json
+                    .then(function(data) {
+                      console.log('Success', data);
+                    })
+                    .catch(function(error) {
+                      console.log("Invalid username or password");
+                    });
+                  }
